@@ -5,10 +5,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -30,10 +32,12 @@ public class MainActivity extends AppCompatActivity {
     private EditText input_missatge, input_resposta,input_ip;
     private Button enviar_b, comprobar_b,save_b;
     private Switch switch_mode;
-    private RadioGroup timer;
+    private RadioButton radiant_manual,cinc,quinze,trenta;
 
 
     private Context context = this;
+    private long execution_time;
+    private Handler handler;
 
 
     private static final int SERVERPORT = 5000;
@@ -52,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
         save_b= findViewById(R.id.save_b);
         comprobar_b= findViewById(R.id.comprobar_b);
         switch_mode= findViewById(R.id.switch_mode);
-        timer= findViewById(R.id.timer);
+        radiant_manual=findViewById(R.id.radiant_manual);
+        cinc=findViewById(R.id.cinc);
+        quinze=findViewById(R.id.quinze);
+        trenta=findViewById(R.id.trenta);
 
 
         comprobar_b.setBackgroundColor(getResources().getColor(R.color.redComprovation));
@@ -61,17 +68,44 @@ public class MainActivity extends AppCompatActivity {
 
         enviar_b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if(input_missatge.getText().toString().length()>0){
-                    MyATaskCliente myATaskYW = new MyATaskCliente();
+                if (radiant_manual.isChecked()) {
+                    if (input_missatge.getText().toString().length() > 0) {
+                        MyATaskCliente myATaskYW = new MyATaskCliente();
 
-                    myATaskYW.execute(input_missatge.getText().toString());
+                        myATaskYW.execute(input_missatge.getText().toString());
 
-                }else{
-                    Toast.makeText(context, "Escriba \"frase\" o \"libro\" ", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(context, "Escriba \"wonder\" o \"excusa\" ", Toast.LENGTH_LONG).show();
+                    }
+
                 }
-
             }
         });
+        //temporitzador
+        if(cinc.isChecked() || quinze.isChecked() || trenta.isChecked()){
+            if(cinc.isChecked()){
+                execution_time=300000;
+            }
+            if(quinze.isChecked()){
+                execution_time=900000;
+
+            }
+            if(trenta.isChecked()){
+                execution_time=1800000;
+
+            }
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    MyATaskCliente myATaskYW = new MyATaskCliente();
+
+                    myATaskYW.execute("excusa");
+                    handler.postDelayed(this,execution_time);
+                }
+            },execution_time);
+        }
+
+
         comprobar_b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,9 +171,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        /**
-         * Oculta ventana emergente y muestra resultado en pantalla
-         * */
+
         @Override
         protected void onPostExecute(String value){
             if(switch_mode.isChecked()) {
@@ -175,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 } else {
+
                     comprobar_b.setBackgroundColor(getResources().getColor(R.color.redComprovation));
                 }
                 socket.close();
