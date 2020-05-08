@@ -44,6 +44,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.41" />
 
+    <Button
+        android:id="@+id/save_b"
+        android:layout_width="165dp"
+        android:layout_height="64dp"
+        android:text="save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.665" />
+
     <EditText
         android:id="@+id/input_resposta"
         android:layout_width="317dp"
@@ -56,6 +67,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.307" />
+
+    <EditText
+        android:id="@+id/input_ip"
+        android:layout_width="317dp"
+        android:layout_height="47dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.561" />
 
     <TextView
         android:id="@+id/textView3"
@@ -80,5 +103,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.139" />
+
+    <Switch
+        android:id="@+id/switch_mode"
+        android:layout_width="91dp"
+        android:layout_height="18dp"
+        android:text="Frases"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.957" />
+
+    <RadioGroup
+        android:id="@+id/timer"
+        android:layout_width="171dp"
+        android:layout_height="157dp"
+        android:checkedButton="@id/radiant_manual"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.947">
+
+        <RadioButton
+            android:id="@+id/radiant_manual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manual" />
+
+        <RadioButton
+            android:id="@+id/cinc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5" />
+
+        <RadioButton
+            android:id="@+id/quinze"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="15" />
+
+        <RadioButton
+            android:id="@+id/trenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="30" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
